@@ -15,4 +15,9 @@
         android:name="com.cunha.assessment_gabriel_cunha_fundamentos.fragments.detailsMusicFragment"
         android:label="details_music_fragment"
         tools:layout="@layout/details_music_fragment" />
+    <fragment
+        android:id="@+id/addMusicFragment"
+        android:name="com.cunha.assessment_gabriel_cunha_fundamentos.fragments.AddMusicFragment"
+        android:label="add_music_fragment"
+        tools:layout="@layout/add_music_fragment" />
 </navigation>

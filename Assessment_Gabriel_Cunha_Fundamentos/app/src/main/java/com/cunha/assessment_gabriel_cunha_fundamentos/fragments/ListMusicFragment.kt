@@ -30,16 +30,19 @@ class ListMusicFragment : Fragment() {
 
         listMusicViewModel = ViewModelProvider(this, ListMusicViewModelFactory(AppDatabase.getInstance())).get(ListMusicViewModel::class.java)
         listMusicViewModel.musics.observe(viewLifecycleOwner){
-            if(!it.isNullOrEmpty())
-            listViewMusic.adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_list_item_1,
-                it
-            )
-            else
-                Snackbar.make(frameLayoutListMusic,
-                "Nenhuma musica cadastrada na base.",
-                Snackbar.LENGTH_LONG).show()
+            if(!it.isNullOrEmpty()) {
+                listViewMusic.adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    it
+                )
+            }else {
+                Snackbar.make(
+                    frameLayoutListMusic,
+                    "Nenhuma musica cadastrada na base.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         }
         mainViewModel = ViewModelProvider(requireActivity())
             .get(MainViewModel::class.java)
@@ -52,6 +55,10 @@ class ListMusicFragment : Fragment() {
             var music = listMusicViewModel.musics.value!!.get(position)
             mainViewModel.selectMusic(music)
             findNavController().navigate(R.id.detailsMusicFragment)
+        }
+
+        floatingActionButtonAddMusic.setOnClickListener{
+            findNavController().navigate(R.id.addMusicFragment)
         }
     }
 }
