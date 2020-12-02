@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
+import androidx.navigation.fragment.findNavController
+import com.cunha.assessment_gabriel_cunha_fundamentos.MainViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.viewModel.ListMusicViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.R
 import com.cunha.assessment_gabriel_cunha_fundamentos.database.AppDatabase
@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.list_music_fragment.*
 class ListMusicFragment : Fragment() {
 
     private lateinit var listMusicViewModel: ListMusicViewModel
+    private lateinit var mainViewModel: MainViewModel
 
 
     override fun onCreateView(
@@ -40,14 +41,17 @@ class ListMusicFragment : Fragment() {
                 "Nenhuma musica cadastrada na base.",
                 Snackbar.LENGTH_LONG).show()
         }
-
+        mainViewModel = ViewModelProvider(requireActivity())
+            .get(MainViewModel::class.java)
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        listViewMusic.setOnItemClickListener { parent, view, position, id ->
+            var music = listMusicViewModel.musics.value!!.get(position)
+            mainViewModel.selectMusic(music)
+            findNavController().navigate(R.id.detailsMusicFragment)
+        }
     }
-
 }

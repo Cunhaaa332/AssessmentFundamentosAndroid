@@ -4,7 +4,6 @@ class Music (
     var NameMusic : String,
     var NameArtist : String,
     var NameAlbum : String,
-    var Photo : String,
     var Link : String
 ) {
 
