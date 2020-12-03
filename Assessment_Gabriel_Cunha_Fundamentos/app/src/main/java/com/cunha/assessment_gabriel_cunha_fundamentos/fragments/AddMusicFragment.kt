@@ -48,6 +48,7 @@ class AddMusicFragment : Fragment() {
                 inputTextArtistName.setText(it.NameArtist)
                 inputTextAlbumName.setText(it.NameAlbum)
                 inputTextLink.setText(it.Link)
+                inputTextNota.setText(it.Nota.toString())
             }
         }
 
@@ -62,6 +63,7 @@ class AddMusicFragment : Fragment() {
                 inputTextArtistName.text.toString(),
                 inputTextAlbumName.text.toString(),
                 inputTextLink.text.toString(),
+                inputTextNota.text.toString().toInt(),
                 mainViewModel.music.value
             )
         }

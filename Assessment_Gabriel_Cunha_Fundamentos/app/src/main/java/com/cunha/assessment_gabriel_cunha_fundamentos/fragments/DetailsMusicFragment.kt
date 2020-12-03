@@ -37,6 +37,7 @@ class detailsMusicFragment : Fragment() {
                 textViewMusicAlbum.text = it.NameAlbum
                 textViewMusicArtist.text = it.NameArtist
                 textViewMusicLink.text = it.Link
+                textViewNota.text = it.Nota.toString()
             } else if (!detailsMusicViewModel.status.value!!) {
                 Snackbar.make(
                     frameLayoutDetailsMusic,

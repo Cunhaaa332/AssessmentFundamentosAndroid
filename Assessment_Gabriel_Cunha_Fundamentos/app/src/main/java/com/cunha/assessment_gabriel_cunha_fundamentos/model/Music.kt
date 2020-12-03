@@ -4,7 +4,8 @@ class Music (
     var NameMusic : String,
     var NameArtist : String,
     var NameAlbum : String,
-    var Link : String
+    var Link : String,
+    var Nota: Int
 ) {
 
     override fun toString(): String {

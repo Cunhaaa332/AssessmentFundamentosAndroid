@@ -25,15 +25,16 @@ class AddMusicViewModel(var instance: AppDatabase ) : ViewModel() {
         NameArtist : String,
         NameAlbum : String,
         Link : String,
+        Nota: Int,
         music: Music?
     ){
         if(music == null){
             instance.add(Music(
-                    NameMusic, NameArtist, NameAlbum, Link
+                    NameMusic, NameArtist, NameAlbum, Link, Nota.toInt()
             ))
         }else{
             instance.edit(
-                    NameMusic,NameArtist,NameAlbum,Link, music
+                    NameMusic,NameArtist,NameAlbum,Link,Nota.toInt(), music
             )
         }
 

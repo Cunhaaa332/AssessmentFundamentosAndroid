@@ -5,7 +5,7 @@
     android:id="@+id/frameLayoutAddMusic"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AddMusicFragment" >
+    tools:context=".fragments.AddMusicFragment">
 
     <EditText
         android:id="@+id/inputTextMusicName"
@@ -70,9 +70,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="30dp"
         android:text="Enviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextLink" />
+
+    <EditText
+        android:id="@+id/inputTextNota"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:hint="Nota..."
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputTextLink" />
