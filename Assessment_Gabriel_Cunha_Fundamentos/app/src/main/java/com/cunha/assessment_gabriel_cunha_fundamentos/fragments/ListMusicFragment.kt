@@ -12,7 +12,7 @@ import com.cunha.assessment_gabriel_cunha_fundamentos.MainViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.viewModel.ListMusicViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.R
 import com.cunha.assessment_gabriel_cunha_fundamentos.database.AppDatabase
-import com.cunha.assessment_gabriel_cunha_fundamentos.viewModel.ListMusicViewModelFactory
+import com.cunha.assessment_gabriel_cunha_fundamentos.factory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_music_fragment.*
 
@@ -28,7 +28,7 @@ class ListMusicFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.list_music_fragment, container, false)
 
-        listMusicViewModel = ViewModelProvider(this, ListMusicViewModelFactory(AppDatabase.getInstance())).get(ListMusicViewModel::class.java)
+        listMusicViewModel = ViewModelProvider(this, ViewModelFactory(AppDatabase.getInstance())).get(ListMusicViewModel::class.java)
         listMusicViewModel.musics.observe(viewLifecycleOwner){
             if(!it.isNullOrEmpty()) {
                 listViewMusic.adapter = ArrayAdapter(

@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.cunha.assessment_gabriel_cunha_fundamentos.MainViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.R
+import com.cunha.assessment_gabriel_cunha_fundamentos.database.AppDatabase
+import com.cunha.assessment_gabriel_cunha_fundamentos.factory.ViewModelFactory
 import com.cunha.assessment_gabriel_cunha_fundamentos.viewModel.DetailsMusicViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.details_music_fragment.*
@@ -24,8 +27,9 @@ class detailsMusicFragment : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.details_music_fragment, container, false)
 
-        mainViewModel =
-            ViewModelProvider (requireActivity()).get(MainViewModel::class.java)
+        detailsMusicViewModel = ViewModelProvider(this, ViewModelFactory(AppDatabase.getInstance())).get(DetailsMusicViewModel::class.java)
+
+        mainViewModel = ViewModelProvider (requireActivity()).get(MainViewModel::class.java)
 
         mainViewModel.music.observe(viewLifecycleOwner){
             if (it != null ) {
@@ -33,7 +37,7 @@ class detailsMusicFragment : Fragment() {
                 textViewMusicAlbum.text = it.NameAlbum
                 textViewMusicArtist.text = it.NameArtist
                 textViewMusicLink.text = it.Link
-            } else{
+            } else if (!detailsMusicViewModel.status.value!!) {
                 Snackbar.make(
                     frameLayoutDetailsMusic,
                     "Nenhuma Musica foi selecionada",
@@ -42,7 +46,36 @@ class detailsMusicFragment : Fragment() {
             }
         }
 
+        detailsMusicViewModel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrBlank()) {
+                Snackbar.make(
+                        frameLayoutDetailsMusic,
+                        it,
+                        Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        detailsMusicViewModel.status.observe(viewLifecycleOwner){
+            if(it){
+                mainViewModel.deleteMusic()
+                findNavController().popBackStack()
+            }
+        }
+
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnDelete.setOnClickListener{
+            var music = mainViewModel.music.value
+            detailsMusicViewModel.delete(music!!)
+        }
+
+        btnEdit.setOnClickListener{
+
+        }
     }
 
 }

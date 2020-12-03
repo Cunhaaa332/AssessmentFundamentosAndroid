@@ -11,7 +11,11 @@ class MainViewModel : ViewModel() {
     val music: LiveData<Music>
     get() = _music
 
-    fun selectMusic(music: Music){
+    fun selectMusic(music: Music?){
         _music.value = music
+    }
+
+    fun deleteMusic() {
+        selectMusic(null)
     }
 }
