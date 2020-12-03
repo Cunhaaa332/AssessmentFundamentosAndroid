@@ -22,6 +22,15 @@ class AppDatabase{
         musics.remove(music)
     }
 
+    fun edit(nameMusic: String, nameArtist: String, nameAlbum: String, link: String, music: Music) {
+        var index = musics.indexOf(music)
+        music.NameMusic = nameMusic
+        music.NameArtist = nameArtist
+        music.NameAlbum = nameAlbum
+        music.Link = link
+        musics[index] = music
+    }
+
 
     companion object{
         private var instance: AppDatabase? = null

@@ -24,15 +24,22 @@ class AddMusicViewModel(var instance: AppDatabase ) : ViewModel() {
         NameMusic : String,
         NameArtist : String,
         NameAlbum : String,
-        Link : String
+        Link : String,
+        music: Music?
     ){
-        instance.add(Music(
-            NameMusic, NameArtist, NameAlbum, Link
-        ))
+        if(music == null){
+            instance.add(Music(
+                    NameMusic, NameArtist, NameAlbum, Link
+            ))
+        }else{
+            instance.edit(
+                    NameMusic,NameArtist,NameAlbum,Link, music
+            )
+        }
 
         if(true){
             _status.value = true
-            _message.value = "Cadastro realizado sem problemas!"
+            _message.value = "Operação realizada sem problemas!"
         }
     }
 }

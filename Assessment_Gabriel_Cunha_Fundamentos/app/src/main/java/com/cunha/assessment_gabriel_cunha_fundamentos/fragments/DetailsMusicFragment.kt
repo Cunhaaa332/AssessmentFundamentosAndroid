@@ -74,7 +74,7 @@ class detailsMusicFragment : Fragment() {
         }
 
         btnEdit.setOnClickListener{
-
+            findNavController().navigate(R.id.addMusicFragment)
         }
     }
 

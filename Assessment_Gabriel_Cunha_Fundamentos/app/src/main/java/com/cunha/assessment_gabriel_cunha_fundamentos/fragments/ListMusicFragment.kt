@@ -58,6 +58,7 @@ class ListMusicFragment : Fragment() {
         }
 
         floatingActionButtonAddMusic.setOnClickListener{
+            mainViewModel.selectMusic(null)
             findNavController().navigate(R.id.addMusicFragment)
         }
     }
