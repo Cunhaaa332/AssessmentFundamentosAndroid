@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cunha.assessment_gabriel_cunha_fundamentos.MainViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.viewModel.ListMusicViewModel
 import com.cunha.assessment_gabriel_cunha_fundamentos.R
+import com.cunha.assessment_gabriel_cunha_fundamentos.adapter.MusicRecyclerAdapter
 import com.cunha.assessment_gabriel_cunha_fundamentos.database.AppDatabase
 import com.cunha.assessment_gabriel_cunha_fundamentos.factory.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -31,11 +34,9 @@ class ListMusicFragment : Fragment() {
         listMusicViewModel = ViewModelProvider(this, ViewModelFactory(AppDatabase.getInstance())).get(ListMusicViewModel::class.java)
         listMusicViewModel.musics.observe(viewLifecycleOwner){
             if(!it.isNullOrEmpty()) {
-                listViewMusic.adapter = ArrayAdapter(
-                    requireContext(),
-                    android.R.layout.simple_list_item_1,
-                    it
-                )
+                val musicRecyclerAdapter = MusicRecyclerAdapter(it)
+                listViewMusic.adapter = musicRecyclerAdapter
+                listViewMusic.layoutManager = LinearLayoutManager(requireContext())
             }else {
                 Snackbar.make(
                     frameLayoutListMusic,
@@ -51,11 +52,11 @@ class ListMusicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listViewMusic.setOnItemClickListener { parent, view, position, id ->
-            var music = listMusicViewModel.musics.value!!.get(position)
-            mainViewModel.selectMusic(music)
-            findNavController().navigate(R.id.detailsMusicFragment)
-        }
+//        listViewMusic.setOnItemClickListener { parent, view, position, id ->
+//            var music = listMusicViewModel.musics.value!!.get(position)
+//            mainViewModel.selectMusic(music)
+//            findNavController().navigate(R.id.detailsMusicFragment)
+//        }
 
         floatingActionButtonAddMusic.setOnClickListener{
             mainViewModel.selectMusic(null)
