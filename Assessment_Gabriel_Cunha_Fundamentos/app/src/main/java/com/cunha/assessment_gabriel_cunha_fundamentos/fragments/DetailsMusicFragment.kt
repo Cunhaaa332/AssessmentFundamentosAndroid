@@ -38,7 +38,6 @@ class detailsMusicFragment : Fragment() {
                 textViewMusicName.text = it.NameMusic
                 textViewMusicAlbum.text = it.NameAlbum
                 textViewMusicArtist.text = it.NameArtist
-                //textViewMusicLink.text = it.Link
                 textViewNota.text = it.Nota.toString()
             } else if (!detailsMusicViewModel.status.value!!) {
                 Snackbar.make(
@@ -78,17 +77,6 @@ class detailsMusicFragment : Fragment() {
 
         btnEdit.setOnClickListener{
             findNavController().navigate(R.id.addMusicFragment)
-        }
-
-        btnLinkMusic.setOnClickListener{
-            var music = mainViewModel.music.value
-            var intent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(music?.Link)
-            )
-           // if(intent.resolveActivity(packageManager) != null){  //verifica se o celular consegue fazer a acao da intent implicita.
-                startActivity(intent)
-           // }
         }
 
 

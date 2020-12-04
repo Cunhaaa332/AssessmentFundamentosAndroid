@@ -1,5 +1,7 @@
 package com.cunha.assessment_gabriel_cunha_fundamentos.fragments
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +18,7 @@ import com.cunha.assessment_gabriel_cunha_fundamentos.R
 import com.cunha.assessment_gabriel_cunha_fundamentos.adapter.MusicRecyclerAdapter
 import com.cunha.assessment_gabriel_cunha_fundamentos.database.AppDatabase
 import com.cunha.assessment_gabriel_cunha_fundamentos.factory.ViewModelFactory
+import com.cunha.assessment_gabriel_cunha_fundamentos.model.Music
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_music_fragment.*
 
@@ -34,7 +37,7 @@ class ListMusicFragment : Fragment() {
         listMusicViewModel = ViewModelProvider(this, ViewModelFactory(AppDatabase.getInstance())).get(ListMusicViewModel::class.java)
         listMusicViewModel.musics.observe(viewLifecycleOwner){
             if(!it.isNullOrEmpty()) {
-                val musicRecyclerAdapter = MusicRecyclerAdapter(it)
+                val musicRecyclerAdapter = MusicRecyclerAdapter(it, this::actionClickMusicLink, this::actionClickMusicVerMais)
                 listViewMusic.adapter = musicRecyclerAdapter
                 listViewMusic.layoutManager = LinearLayoutManager(requireContext())
             }else {
@@ -52,15 +55,22 @@ class ListMusicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        listViewMusic.setOnItemClickListener { parent, view, position, id ->
-//            var music = listMusicViewModel.musics.value!!.get(position)
-//            mainViewModel.selectMusic(music)
-//            findNavController().navigate(R.id.detailsMusicFragment)
-//        }
-
         floatingActionButtonAddMusic.setOnClickListener{
             mainViewModel.selectMusic(null)
             findNavController().navigate(R.id.addMusicFragment)
         }
+    }
+
+    private fun actionClickMusicLink(music: Music){
+        var intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(music?.Link)
+        )
+        startActivity(intent)
+    }
+
+    private fun actionClickMusicVerMais(music: Music){
+        mainViewModel.selectMusic(music)
+        findNavController().navigate(R.id.detailsMusicFragment)
     }
 }

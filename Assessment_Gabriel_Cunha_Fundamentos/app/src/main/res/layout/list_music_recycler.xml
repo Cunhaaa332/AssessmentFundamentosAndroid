@@ -31,21 +31,11 @@
         android:id="@+id/textViewRecyclerNota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
         android:hint="Nota..."
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/btnRecyclerLink"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnRecyclerLink"
-        android:layout_width="85dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="8dp"
-        android:text="ouvir"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -54,4 +44,36 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnRecyclerLink"
+        android:layout_width="28dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:background="#0E0E0E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:text="Nota:"
+        app:layout_constraintEnd_toStartOf="@+id/textViewRecyclerNota"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnMusicVerMais"
+        android:layout_width="28dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRecyclerLink"
+        app:srcCompat="@android:drawable/ic_menu_directions" />
 </androidx.constraintlayout.widget.ConstraintLayout>
